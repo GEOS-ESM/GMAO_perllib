@@ -2409,16 +2409,23 @@ sub local_get{
       ( $remote_id, $remote_machine, $remote_file ) = @_[0..2];
    }
 
-   if ($options{"preserve"}) {
-       $cmd = "cp -p $remote_file $local_file";
+   if ($options{"links"}) {
+       $cmd = "ln -s $remote_file $local_file";
        print "cmd = $cmd\n";
        system($cmd);
        $retcode = $? >> 8;
        if ($retcode) { $cp_ok = 0 }
        else          { $cp_ok = 1 }
+   } elsif ($options{"preserve"}) {
+      $cmd = "cp -p $remote_file $local_file";
+      print "cmd = $cmd\n";
+      system($cmd);
+      $retcode = $? >> 8;
+      if ($retcode) { $cp_ok = 0 }
+      else          { $cp_ok = 1 }
    } else {
-   print "cmd = copy( $remote_file, $local_file )\n";
-   $cp_ok = copy( $remote_file, $local_file );
+      print "cmd = copy( $remote_file, $local_file )\n";
+      $cp_ok = copy( $remote_file, $local_file );
    }
 
    return( $cp_ok );
