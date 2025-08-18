@@ -17,6 +17,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Deprecated
 
+## [1.2.0] - 2025-08-18
+
+### Changed
+
+- Add option in `local_get()` in `Remote_utils.pm` to allow symbolic links instead of copies
+
 ## [1.1.0] - 2025-04-15
 
 ### Added
